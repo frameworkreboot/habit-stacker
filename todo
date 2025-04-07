@@ -1,0 +1,120 @@
+# HabitStacker Application - TODO List
+
+## 0. Simplify Settings
+- ✅ drop all general settings, we always go for the default
+- ✅ drop all notifications, we don't want to bother people
+- ✅ Drop appearance settings, except for theme.
+- ✅ Basically we only want the user to be able to select Light, Dark or System theme
+- ✅ Created dedicated settings page with theme selector only
+- ✅ Added navigation to the settings page via header icon
+
+## 1. Fix Reactive Updates for Progress Components
+**Issue:** Progress summary and habit chain visualization don't update in real-time when habits are marked as complete/incomplete.
+**Status:** Completed
+**Priority:** High
+**Solution Implemented:**
+- Created a central HabitContext using React Context API
+- Added proper state management with context subscription across components
+- Set up consistent localStorage keys (habitStacks and completedToday)
+- Unified the habit state and completion tracking
+- Fixed the data flow between habit stacks and progress components
+
+## 2. Fix Weekly Streak Visualization Logic
+**Issue:** When completing all habits for today, the visualization incorrectly streaks out days 6 and 7.
+**Status:** Completed
+**Priority:** Medium
+**Solution Implemented:**
+- ✅ Fixed date consistency across all components
+- ✅ Implemented uniform date handling in toggleHabitCompletion, isHabitCompleted, and getCompletedHabitsForRange
+- ✅ Corrected streak visualization to only show colors for current/past days
+- ✅ Improved the isToday check with precise date comparison
+- ✅ Prevented future dates from showing completion status
+
+## 3. Create Habit Network Visualization Page
+**Issue:** Need a dedicated page for visualizing habits as an interconnected network.
+**Status:** Not Started
+**Priority:** Medium
+**Tasks:**
+- Create new route `/habits/network` or `/visualize`
+- Build a network graph visualization component
+- Show connections between trigger habits and dependent habits
+- Use a visualization library (d3.js, react-force-graph, or visx)
+- Add interactive elements to explore habit relationships
+- Include tooltips with habit details when hovering nodes
+
+## 4. Fix Habit Creation and Improve Form
+**Issue:** New habits can't be created, and the stack selection needs improvement.
+**Status:** Completed
+**Priority:** High
+**Solution Implemented:**
+- Integrated the habit creation form with HabitContext
+- Updated the form to use context APIs instead of directly manipulating localStorage
+- Fixed the data flow to properly store new habits in their stacks
+- Ensured real-time updates of the UI when new habits are created
+**To Do:**
+- Replace the text input for "Add to Stack" with a proper dropdown
+
+## 5. Additional Improvements
+**Status:** Not Started
+**Priority:** Low
+- Add proper real-time validation for the habit creation form
+- Implement toast notifications for successful/failed operations
+- Add a confirmation dialog before deleting habits
+- Create a proper date-based persistence strategy for tracking habit completion history
+- Optimize localStorage usage to prevent performance issues with large datasets
+
+## 6. Supabase Backend Integration
+**Status:** Not Started
+**Priority:** High
+**Tasks:**
+- Create a new Supabase project
+- Set up database tables for:
+  - Users
+  - Habit Stacks
+  - Habits
+  - Completions (date-based tracking)
+- Design and implement database relationships and constraints
+- Create API endpoints for CRUD operations on habits and stacks
+- Set up Row Level Security (RLS) policies for data privacy
+
+## 7. User Authentication
+**Status:** Not Started
+**Priority:** High
+**Tasks:**
+- Set up Supabase authentication system
+- Implement sign-up, login, and password reset flows
+- Create protected routes in Next.js
+- Add user profile management
+- Integrate social login options (Google, GitHub)
+- Set up email verification
+
+## 8. Migrate from LocalStorage to Supabase
+**Status:** Not Started
+**Priority:** Medium
+**Tasks:**
+- Create migration utility to transfer localStorage data to Supabase
+- Refactor current storage functions to use Supabase
+- Implement error handling and offline support
+- Add data synchronization between devices
+- Set up optimistic UI updates for better UX
+
+## 9. Vercel Deployment
+**Status:** Not Started
+**Priority:** Medium
+**Tasks:**
+- Set up a GitHub repository for the project
+- Configure Vercel project settings and environment variables
+- Link Vercel project to GitHub repository
+- Set up CI/CD pipeline for automated deployments
+- Configure custom domain and SSL
+- Implement preview deployments for pull requests
+
+## 10. Performance Optimization for Production
+**Status:** Not Started
+**Priority:** Low
+**Tasks:**
+- Add proper monitoring and error tracking (Sentry)
+- Implement caching strategies for Supabase queries
+- Optimize component rendering and memoization
+- Set up analytics to track user engagement
+- Configure proper logging for production debugging
